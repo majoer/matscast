@@ -14,6 +14,7 @@ matscast.on(Matscast.EVENT_MESSAGE, () => {...});
 ```
 
 #### Node
+```
 const WebSocket = require('ws');
 const Matscast = require('../src/lib/index');
 
@@ -27,6 +28,6 @@ server.on('connection', (ws) => {
 
   matscast.on(Matscast.EVENT_MESSAGE, (message) => {...});
 });
-
+```
 
 ## Events
