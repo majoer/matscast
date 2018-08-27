@@ -5,9 +5,7 @@ module.exports = {
   mode: 'production',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, './dist'),
-    library: '',
-    libraryTarget: 'commonjs'
+    path: path.resolve(__dirname, './dist')
   },
   module: {
     rules: [
