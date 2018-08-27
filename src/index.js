@@ -1,7 +1,6 @@
 const Matscast = require('./lib/index');
 
-const ws = new WebSocket('ws://localhost:2000');
-const matscast = new Matscast(ws);
+const matscast = new Matscast(new WebSocket('ws://localhost:2000'));
 
 console.log('Created websocket');
 
