@@ -30,4 +30,9 @@ server.on('connection', (ws) => {
 });
 ```
 
+## Properties
+- matscast.audioPlayer
+- matscast.videoPlayer
+- matscast.imageViewer
+
 ## Events
