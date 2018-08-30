@@ -1,4 +1,3 @@
-const WebSocket = require('isomorphic-ws');
 const EventEmitter = require('events');
 const AudioPlayer = require('./applications/audio-player');
 const VideoPlayer = require('./applications/video-player');
@@ -6,15 +5,16 @@ const ImageViewer = require('./applications/image-viewer');
 const MatscastMessage = require('./matscast-message');
 const matscastEvents = require('./matscast-events');
 
-const { EVENT_MESSAGE } = matscastEvents;
+const { EVENT_MESSAGE, EVENT_DISCONNECTED } = matscastEvents;
+const STATE_WEBSOCKET_OPEN = 1;
 
 class Matscast extends EventEmitter {
 
   constructor(webSocket) {
     super();
 
-    if (!webSocket || !(webSocket instanceof WebSocket)) {
-      throw new TypeError(`arg0 must be WebSocket, was ${typeof webSocket}`);
+    if (!webSocket) {
+      throw new TypeError(`arg0 must be WebSocket`);
     }
 
     this.webSocket = webSocket;
@@ -35,10 +35,14 @@ class Matscast extends EventEmitter {
 
       this.emit(EVENT_MESSAGE, message);
     };
+
+    this.webSocket.onclose = () => {
+      this.emit(EVENT_DISCONNECTED);
+    }
   }
 
   sendMessage(message) {
-    if (this.webSocket.readyState === WebSocket.OPEN) {
+    if (this.webSocket.readyState === STATE_WEBSOCKET_OPEN) {
       this.webSocket.send(new MatscastMessage(message).toString());
     } else {
       console.log(`Can't send message, websocket ${this.webSocket.url} closed`);

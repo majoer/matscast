@@ -1,21 +1,26 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/lib/index.js',
   mode: 'production',
+  entry: './src/lib/index.js',
+  target: 'node',
   output: {
     filename: 'index.js',
-    path: path.resolve(__dirname, './dist')
+    path: path.resolve(__dirname, './dist'),
+    library: '',
+    libraryTarget: 'umd',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        exclude: {
+          and: [/node_modules/, /src\/lib\/browser\.js/]
+        },
         use: {
           loader: "babel-loader"
         }
       }
     ]
   }
-};
+}

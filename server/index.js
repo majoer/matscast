@@ -1,6 +1,6 @@
-const WebSocket = require('ws');
+const WebSocket = require('isomorphic-ws');
 const log = require('node-log')(__filename);
-const Matscast = require('../src/lib/index');
+const Matscast = require('..');
 
 const server = new WebSocket.Server({
   port: 2000
@@ -16,7 +16,11 @@ server.on('connection', (ws) => {
     log(message);
   });
 
-  setInterval(() => {
+  const intervalHook = setInterval(() => {
     matscast.audioPlayer.play();
   }, 1000);
+
+  matscast.on(Matscast.EVENT_DISCONNECTED, () => {
+    clearInterval(intervalHook);
+  })
 });
