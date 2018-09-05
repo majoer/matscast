@@ -33,10 +33,6 @@ class AudioPlayer extends EventEmitter {
     this.sendMessage(EVENT_AUDIO_PAUSE);
   }
 
-  stop() {
-    this.sendMessage(EVENT_AUDIO_STOP);
-  }
-
   seek(position) {
     this.sendMessage(EVENT_AUDIO_SEEK, position);
   }

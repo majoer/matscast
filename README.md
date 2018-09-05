@@ -24,7 +24,6 @@ const server = new WebSocket.Server({
 
 server.on('connection', (ws) => {
   const matscast = new Matscast(ws);
-  log('ws connected');
 
   matscast.on(Matscast.EVENT_MESSAGE, (message) => {...});
 });

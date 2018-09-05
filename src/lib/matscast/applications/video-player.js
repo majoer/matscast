@@ -33,10 +33,6 @@ class VideoPlayer extends EventEmitter {
     this.sendMessage(EVENT_VIDEO_PAUSE);
   }
 
-  stop() {
-    this.sendMessage(EVENT_VIDEO_STOP);
-  }
-
   seek(position) {
     this.sendMessage(EVENT_VIDEO_SEEK, position);
   }
