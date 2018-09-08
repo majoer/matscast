@@ -13,7 +13,7 @@ class MatscastMessage {
 
   toString() {
     if (this.payload) {
-      return `${PREFIX_MESSAGE}:${this.event}:${this.payload}`;
+      return `${PREFIX_MESSAGE}:${this.event}:${JSON.stringify(this.payload)}`;
     } else {
       return `${PREFIX_MESSAGE}:${this.event}`;
     }

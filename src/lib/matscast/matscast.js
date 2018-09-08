@@ -41,9 +41,9 @@ class Matscast extends EventEmitter {
     }
   }
 
-  sendMessage(message) {
+  sendMessage(message, payload) {
     if (this.webSocket.readyState === STATE_WEBSOCKET_OPEN) {
-      this.webSocket.send(new MatscastMessage(message).toString());
+      this.webSocket.send(new MatscastMessage(message, payload).toString());
     } else {
       console.log(`Can't send message, websocket ${this.webSocket.url} closed`);
     }
